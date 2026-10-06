@@ -1,0 +1,36 @@
+                    React
+                      │
+                      ↓
+                   FastAPI
+                      │
+              ┌───────┴────────┐
+              │                │
+           Ingestion          Query
+              │                │
+              ↓                ↓
+        PDF Extraction    Query Transformation
+              │                │
+              ↓                ↓
+        Custom Chunking   Hybrid Retrieval
+              │                │
+              ↓                ↓
+         OpenAI Embedding    Top 15
+              │                │
+              ↓                ↓
+         PostgreSQL       Reranking
+         + pgvector           │
+                              ↓
+                            Top 5
+                              │
+                              ↓
+                     Relevance Threshold
+                         /          \
+                       NO            YES
+                       ↓              ↓
+                  I don't know     Context
+                                      │
+                                      ↓
+                                OpenAI LLM
+                                      │
+                                      ↓
+                              Answer + Citations

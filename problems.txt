@@ -1,0 +1,30 @@
+
+1. Naive chunking
+Structure-aware/custom chunking
+Teaches document preprocessing
+
+2. Only vector search
+Hybrid Vector + BM25
+Teaches better retrieval
+
+3. No reranking
+Cross-encoder reranker
+Teaches retrieval optimization
+
+4. Irrelevant chunks
+Relevance threshold
+Teaches when to say “I don’t know”
+
+5. Weak citations
+Proper source/node mapping
+Teaches grounded answers
+
+6. No query transformation
+Query rewriting / multi-query
+Teaches retrieval improvement
+
+7. No Evaluation
+Small evaluation dataset + metrics
+Teaches how to measure RAG
+
+8. Duplicate ingestion
