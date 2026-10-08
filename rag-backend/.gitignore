@@ -1,3 +1,5 @@
 .env
 .venv/
 uploads/
+rag-backend/.DS_Store
+.DS_Store
