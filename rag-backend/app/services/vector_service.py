@@ -1,16 +1,20 @@
+# app/services/vector_service.py
+
 from app.db.postgres import get_connection
 
 
 def insert_chunk(
     document_id,
     filename,
-    page_number,
+    start_page,
+    end_page,
     chunk_index,
     content,
-    embedding
+    embedding,
 ):
     conn = get_connection()
     cursor = conn.cursor()
+
     cursor.execute(
         """
         INSERT INTO chunks (
@@ -33,24 +37,26 @@ def insert_chunk(
         (
             document_id,
             filename,
-            page_number,
+            start_page,
             chunk_index,
             content,
-            embedding
-        )
+            embedding,
+        ),
     )
+
     conn.commit()
+
     cursor.close()
     conn.close()
-    
+
 
 def search_similar_chunks(
     embedding,
-    top_k=5
+    top_k=5,
 ):
-
     conn = get_connection()
     cursor = conn.cursor()
+
     cursor.execute(
         """
         SELECT
@@ -59,7 +65,9 @@ def search_similar_chunks(
             page_number,
             chunk_index,
             content,
-            1 - (embedding <=> %s::vector) AS score
+            1 - (
+                embedding <=> %s::vector
+            ) AS score
         FROM chunks
         ORDER BY embedding <=> %s::vector
         LIMIT %s
@@ -67,12 +75,15 @@ def search_similar_chunks(
         (
             embedding,
             embedding,
-            top_k
-        )
+            top_k,
+        ),
     )
+
     rows = cursor.fetchall()
+
     cursor.close()
     conn.close()
+
     return [
         {
             "id": str(row[0]),
@@ -80,7 +91,7 @@ def search_similar_chunks(
             "page": row[2],
             "chunk_index": row[3],
             "text": row[4],
-            "score": float(row[5])
+            "score": float(row[5]),
         }
         for row in rows
     ]

@@ -34,3 +34,38 @@
                                       │
                                       ↓
                               Answer + Citations
+
+
+
+
+
+                    PDF
+                     │
+                     ▼
+              extract_pages()
+                     │
+                     ▼
+              PageText objects
+                     │
+                     ▼
+             chunk_document()
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+     detect headings       detect paragraphs
+          │                     │
+          └──────────┬──────────┘
+                     ▼
+              Build sections
+                     │
+                     ▼
+              Split large blocks
+                     │
+                     ▼
+              ~600 token chunks
+                     │
+                     ▼
+           OpenAI embeddings
+                     │
+                     ▼
+                pgvector

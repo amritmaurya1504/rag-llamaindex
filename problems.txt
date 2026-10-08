@@ -1,7 +1,37 @@
 
 1. Naive chunking
-Structure-aware/custom chunking
+Structure-aware/custom chunking --> InProgress
 Teaches document preprocessing
+
+------------------
+
+PDF
+ ↓
+Extract pages
+ ↓
+Normalize text
+ ↓
+Detect headings / paragraphs / lists
+ ↓
+Build semantic sections across pages
+ ↓
+Split oversized sections
+ ↓
+Pack into ~400–700 token chunks
+ ↓
+Small semantic overlap
+ ↓
+Store metadata
+
+clean_text()
+extract_blocks()
+detect_headings()
+build_sections()
+split_large_sections()
+add_overlap()
+create_chunk_metadata()
+
+------------------
 
 2. Only vector search
 Hybrid Vector + BM25
@@ -28,3 +58,6 @@ Small evaluation dataset + metrics
 Teaches how to measure RAG
 
 8. Duplicate ingestion
+
+
+
